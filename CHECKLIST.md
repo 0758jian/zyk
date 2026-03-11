@@ -22,10 +22,22 @@
 - [ ] 准备 SSL 证书（推荐使用 Let's Encrypt 免费证书）
 
 ### 2. 服务器准备
-- [ ] 购买云服务器（推荐 2 核 4G 以上）
-- [ ] 安装 Node.js 18+
-- [ ] 安装 Nginx
-- [ ] 安装 PM2: `npm install -g pm2`
+
+#### Debian 10 专用
+- [ ] 更新系统：`apt update && apt upgrade -y`
+- [ ] 安装工具：`apt install -y curl git wget build-essential`
+- [ ] 安装 nvm：`curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash`
+- [ ] 安装 Node.js：`nvm install --lts`
+- [ ] 验证版本：`node -v` (应 >= 18.x)
+- [ ] 安装 Nginx：`apt install -y nginx`
+- [ ] 安装 PM2：`npm install -g pm2`
+- [ ] 配置防火墙（开放 80、443 端口）
+
+#### Ubuntu 20.04+
+- [ ] 安装 Node.js：`curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && apt install -y nodejs`
+- [ ] 验证版本：`node -v` (应 >= 18.x)
+- [ ] 安装 Nginx：`apt install -y nginx`
+- [ ] 安装 PM2：`npm install -g pm2`
 - [ ] 配置防火墙（开放 80、443 端口）
 
 ### 3. 代码部署

@@ -4,17 +4,64 @@
 
 ### 1. 准备服务器
 
-推荐使用 Ubuntu 20.04+ 或 CentOS 7+
+推荐使用 Debian 10+、Ubuntu 20.04+ 或 CentOS 7+
 
 ### 2. 安装依赖
 
+#### Debian 10 专用安装步骤
+
 ```bash
-# 安装 Node.js (v18+)
-curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+# 更新系统源
+apt update && apt upgrade -y
+
+# 安装必要工具
+apt install -y curl git wget build-essential
+
+# 安装 Node.js (使用 nvm 安装最新版本，推荐 v18+)
+# 1. 安装 nvm
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+
+# 2. 加载 nvm（或重新登录终端）
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# 3. 安装 Node.js LTS 版本
+nvm install --lts
+
+# 4. 验证安装
+node -v
+npm -v
+
+# 安装 Nginx
+apt install -y nginx
+
+# 安装 PM2
+npm install -g pm2
+```
+
+#### Ubuntu 20.04+ 安装步骤
+
+```bash
+# 安装 Node.js (v20.x)
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 apt install -y nodejs
 
 # 安装 Nginx
 apt install -y nginx
+
+# 安装 PM2
+npm install -g pm2
+```
+
+#### CentOS 7+ 安装步骤
+
+```bash
+# 安装 Node.js (使用 NodeSource)
+curl -fsSL https://rpm.nodesource.com/setup_20.x | bash -
+yum install -y nodejs
+
+# 安装 Nginx
+yum install -y nginx
 
 # 安装 PM2
 npm install -g pm2
