@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>在线影院</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1 class="logo">🎬 在线影院</h1>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="搜索电影、电视剧...">
+        <button onclick="search()">搜索</button>
+      </div>
+      <nav class="nav" id="typeNav"></nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="filter-bar">
+      <select id="typeFilter" onchange="loadVideos()">
+        <option value="0">全部类型</option>
+      </select>
+      <select id="sortFilter" onchange="loadVideos()">
+        <option value="time">最新上映</option>
+        <option value="hits">最热</option>
+        <option value="score">评分</option>
+      </select>
+    </div>
+
+    <div class="video-grid" id="videoGrid">
+      <div class="loading">加载中...</div>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+  </main>
+
+  <div class="modal" id="playerModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closePlayer()">&times;</button>
+      <div class="player-container">
+        <video id="videoPlayer" controls></video>
+        <div class="episode-list" id="episodeList"></div>
+      </div>
+      <div class="video-info" id="videoInfo"></div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
