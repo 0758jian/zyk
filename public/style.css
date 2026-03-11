@@ -101,16 +101,22 @@ body {
 
 .nav-dropdown {
   position: relative;
-  display: contents;
+  display: inline-block;
+  vertical-align: middle;
+  height: 36px;
+  line-height: 36px;
 }
 
 .nav-dropdown > a {
+  display: inline-block;
   color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
   padding: 8px 16px;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.1);
   transition: all 0.3s;
+  height: 36px;
+  line-height: 20px;
 }
 
 .nav-dropdown .dropdown-content {
