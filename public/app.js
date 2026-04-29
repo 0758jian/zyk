@@ -257,7 +257,6 @@ function showPlayer(video) {
     <p><strong>主演:</strong> ${video.vod_actor || '未知'}</p>
     <p><strong>导演:</strong> ${video.vod_director || '未知'}</p>
     <p><strong>简介:</strong> ${video.vod_content || '暂无简介'}</p>
-    <p><strong>播放源:</strong> ${video.vod_play_from || '默认'}</p>
   `;
   
   const episodes = parseEpisodes(video.vod_play_url);
