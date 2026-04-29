@@ -100,7 +100,12 @@ async function loadVideos() {
     });
     
     if (currentType > 0) {
-      params.append('t', currentType);
+      const children = categoryChildren[currentType];
+      if (children && children.length > 0) {
+        params.append('t', children.join(','));
+      } else {
+        params.append('t', currentType);
+      }
     }
     
     const res = await fetch(`${API_URL}/detail?${params}`);
@@ -109,6 +114,7 @@ async function loadVideos() {
     if (result.success && result.data.list) {
       renderVideos(result.data.list);
       renderPagination(result.data.page, result.data.pagecount);
+      preloadNextPage(currentType, result.data.page, result.data.pagecount);
     } else {
       grid.innerHTML = '<div class="error">暂无数据</div>';
     }
@@ -176,6 +182,24 @@ async function goToPage(page) {
   currentPage = page;
   await loadVideos();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function preloadNextPage(typeId, current, total) {
+  const next = current + 1;
+  if (next > total) return;
+
+  const params = new URLSearchParams({ ac: 'detail', pg: next });
+  if (typeId > 0) {
+    const children = categoryChildren[typeId];
+    if (children && children.length > 0) {
+      params.append('t', children.join(','));
+    } else {
+      params.append('t', typeId);
+    }
+  }
+
+  fetch(`${API_URL}/detail?${params}`, { priority: 'low' })
+    .catch(() => {});
 }
 
 async function search() {
@@ -295,6 +319,7 @@ function playEpisode(index) {
   }
   
   if (url.includes('.m3u8')) {
+    url = `/api/proxy-video?url=${encodeURIComponent(url)}`;
     if (Hls.isSupported()) {
       hls = new Hls({
         enableWorker: true,
