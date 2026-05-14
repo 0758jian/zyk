@@ -26,7 +26,6 @@ async function loadTypes() {
       allTypes = result.data.class;
       
       const nav = document.getElementById('typeNav');
-      const filter = document.getElementById('typeFilter');
       
       nav.innerHTML = `<a href="#" onclick="filterByType(0); return false;" class="active">首页</a>`;
       
@@ -35,7 +34,6 @@ async function loadTypes() {
         
         if (noDropdownTypes.includes(typeId)) {
           nav.innerHTML += `<a href="#" onclick="filterByType(${typeId}); return false;">${type.type_name}</a>`;
-          filter.innerHTML += `<option value="${typeId}">${type.type_name}</option>`;
         } else if (parentTypes.includes(typeId)) {
           nav.innerHTML += `
             <div class="nav-dropdown">
@@ -43,7 +41,6 @@ async function loadTypes() {
               <div class="dropdown-content" id="dropdown-${typeId}"></div>
             </div>
           `;
-          filter.innerHTML += `<option value="${typeId}">${type.type_name}</option>`;
           renderSubCategories(typeId);
         }
       });
@@ -88,8 +85,6 @@ async function filterByType(typeId) {
 
 async function loadVideos() {
   const grid = document.getElementById('videoGrid');
-  const sortFilter = document.getElementById('sortFilter');
-  const sort = sortFilter.value;
   
   grid.innerHTML = '<div class="loading">加载中...</div>';
   
